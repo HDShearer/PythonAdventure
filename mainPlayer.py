@@ -14,7 +14,7 @@ class Player(object):
     global roomIn
     roomIn = 0
     damage = 0
-    Race = "gnOwO whats this. gnotices bulge"
+    Race = '"gnOwO whats this?" *gnotices bulge*'
     armor = 0
     HP = 0
     Roll = 0
