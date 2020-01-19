@@ -1,5 +1,6 @@
-#work in progress
+# work in progress
 import random as rdm
+
 
 class generateNPC(object):
     occupations = ['blacksmith', 'shopkeeper', 'peasant', ]
@@ -45,5 +46,8 @@ class generateNPC(object):
             return
         elif my_occupation == 'blacksmith' and no_blacksmith == False:
             my_occupation = 'peasant'
-        if my_occupation == 'shopkeeper' and no_shopkeeper == True:
+        elif my_occupation == 'shopkeeper' and no_shopkeeper == True:
             return
+
+        elif my_occupation == 'shopkeeper' and no_shopkeeper == False:
+            my_occupation = 'peasant'
