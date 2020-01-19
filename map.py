@@ -29,7 +29,10 @@ class Map(object):
                 gameMap[i, x] = roomList[x]
                 x = x + 1
             i = i + 1
-        print(gameMap)
+
+    def generate(self):
+        for row in gameMap:
+            dss
 
 
 class DungeonMap(Map):
