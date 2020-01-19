@@ -1,6 +1,6 @@
 # work in progress
 import random as rdm
-import  rooms as rms
+from map import map
 
 OCCUPATIONS = ['blacksmith', 'shopkeeper', 'peasant', ]
 
@@ -65,8 +65,9 @@ class generateNPCs(object):
         return my_name
 
     def generateLocation(self):
-
-
+        pass
+        npcMap = map
+        number_of_npcs = rdm.randrange(2, 4)
     def __init__(self):
         name = generateNPCs.generateName(self, name=NAME)
         occupation = generateNPCs.generateOccupation(self, noblacksmith=NOBLACKSMITH, noshopkeeper=NOSHOPKEEPER)
