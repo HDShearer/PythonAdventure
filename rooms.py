@@ -1,12 +1,11 @@
 import items as I
 
-
 class Room(object):
-    Exits = []
-    Description = ""
-    Name = ""
+    Exits = None
+    Description = None
+    Name = None
     Contents = []
-    Enemies = []
+    Enemies = None
     PosX = 0
     PosY = 0
 
