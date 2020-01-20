@@ -7,7 +7,7 @@ def remove_newlines(fname):
 
 
 class Map(object):
-    def __init__(self):
+    def loadMap(self):
         gameMap = numpy.array(
             [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -19,21 +19,22 @@ class Map(object):
         i = 0
         for line in mapLines:
             cleanedLine = line.strip()
-            print(cleanedLine)
+            #print(cleanedLine) commented out for debugging on my end
             roomList = cleanedLine.split(" ")
             roomList.pop()
-            print(roomList)
+            #print(roomList)
             x = 0
             for room in roomList:
-                print(roomList[x])
+                #print(roomList[x])
                 gameMap[i, x] = roomList[x]
                 x = x + 1
             i = i + 1
-        print(gameMap)
+        #print(gameMap)
+        return gameMap
+
+    def __init__(self):
+        Map.loadMap(object)
 
 
 class DungeonMap(Map):
     randomMap = []
-
-
-map = Map()
