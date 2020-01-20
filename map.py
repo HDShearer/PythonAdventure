@@ -5,14 +5,27 @@ def remove_newlines(fname):
     flist = open(fname).readlines()
     return [s.rstrip('\n') for s in flist]
 
+def file_length(fname):
+    with open(fname) as f:
+        for i, l in enumerate(f, 1):
+            pass
+    return i
+
+def line_length(fname):
+    mapEnv = open("mapstate.txt", "r")
+    mapLines = mapEnv.readlines()
+    for line in mapLines:
+        cleanedLine = line.strip()
+        print(cleanedLine)
+        roomList = cleanedLine.split(" ")
+        roomList.pop()
+        return len(roomList)
 
 class Map(object):
     def __init__(self):
-        gameMap = numpy.array(
-            [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
+        yL = file_length("mapstate.txt")
+        xL = line_length("mapstate.txt")
+        gameMap = numpy.zeros((yL, xL))
         remove_newlines("mapstate.txt")
         mapEnv = open("mapstate.txt", "r")
         mapLines = mapEnv.readlines()
@@ -29,10 +42,12 @@ class Map(object):
                 gameMap[i, x] = roomList[x]
                 x = x + 1
             i = i + 1
+        print(gameMap)
 
-    def generate(self):
-        for row in gameMap:
-            dss
+    #def generate(self):
+     #   for row in gameMap:
+      #      pass
+
 
 
 class DungeonMap(Map):
