@@ -1,4 +1,7 @@
+
 import items as I
+descriptions = {0: "A plain grassy field", 1: "A tall stone wall. You probably won't get past this."}
+name = {0: "Field", 1: "Wall
 
 class Room(object):
     Exits = None
@@ -17,18 +20,6 @@ class Room(object):
         self.PosX = DefPosX
         self.PosY = DefPosY
         self.Enemies = DefEnemies
-
-    def generate(self):
-        for i in self.Contents:
-            if i in I.items:
-                if "WWW" in I.category[i]:
-                    pass
-                elif "OOO" in I.category[i]:
-                    pass
-                elif "MMM" in I.category[i]:
-                    pass
-                elif "TTT" in I.category[i]:
-                    pass
 
 
 rooms = {0: "A blank room for debugging.", 1: "A not blank room for debugging", 2: "more blank rooms for debugging"}
