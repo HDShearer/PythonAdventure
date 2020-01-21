@@ -76,14 +76,12 @@ class generateNPCs(object):
             return my_occupation
         elif my_occupation == 'shopkeeper' and noshopkeeper == True:
             noshopkeeper = False
-
             return my_occupation
         else:
             my_occupation = 'peasant'
             return my_occupation
 
     def generateName(self, name=NAME):
-
         return name[rdm.randrange(0, len(name))]
 
     def generateLocation(self):
@@ -92,8 +90,6 @@ class generateNPCs(object):
         MAP_Y = rdm.randrange(0, len(MAP[0]))
         MAP_XY = [MAP_X, MAP_Y]
         return MAP_XY
-
-        return
 
     def generate_number_of_npcs(self):
         return rdm.randrange(2, 5)
@@ -123,16 +119,6 @@ class generateNPCs(object):
 
     def run(self):
         return generateNPCs.generateNPC(object)
-
-
-class test(object):
-    generateNPCs.run(object)
-
-        my_name = name[rdm.randrange(0, len(name))]
-        return my_name
-
-    def generateLocation(self):
-
 
     def __init__(self):
         name = generateNPCs.generateName(self, name=NAME)
