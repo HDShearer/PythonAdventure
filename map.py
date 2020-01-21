@@ -16,7 +16,6 @@ def line_length(fname):
     mapLines = mapEnv.readlines()
     for line in mapLines:
         cleanedLine = line.strip()
-        print(cleanedLine)
         roomList = cleanedLine.split(" ")
         roomList.pop()
         return len(roomList)
@@ -39,6 +38,7 @@ class Map(object):
                 gameMap[i, x] = roomList[x]
                 x = x + 1
             i = i + 1
+        print(gameMap)
 
     #def generate(self):
      #   for row in gameMap:
