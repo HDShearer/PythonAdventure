@@ -4,7 +4,7 @@ import map
 import numpy as np
 import pandas as pds
 _MAP = map.Map.loadMap(object)
-import  rooms as rms
+import rooms as rms
 
 OCCUPATIONS = ['blacksmith', 'shopkeeper', 'peasant', ]
 
@@ -121,10 +121,7 @@ class generateNPCs(object):
         return generateNPCs.generateNPC(object)
 
     def __init__(self):
-        name = generateNPCs.generateName(self, name=NAME)
-        occupation = generateNPCs.generateOccupation(self, noblacksmith=NOBLACKSMITH, noshopkeeper=NOSHOPKEEPER)
-        print(name)
-        print(occupation)
+        generateNPCs.generateNPC(object)
 
 class run(object):
     generateNPCs.__init__(object)

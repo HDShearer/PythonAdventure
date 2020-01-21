@@ -28,7 +28,6 @@ class Map(object):
              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
-    def __init__(self):
         yL = file_length("mapstate.txt")
         xL = line_length("mapstate.txt")
         gameMap = numpy.zeros((yL, xL))
@@ -38,17 +37,17 @@ class Map(object):
         i = 0
         for line in mapLines:
             cleanedLine = line.strip()
-            #print(cleanedLine) commented out for debugging on my end
+            # print(cleanedLine) commented out for debugging on my end
             roomList = cleanedLine.split(" ")
             roomList.pop()
-            #print(roomList)
+            # print(roomList)
             x = 0
             for room in roomList:
-                #print(roomList[x])
+                # print(roomList[x])
                 gameMap[i, x] = roomList[x]
                 x = x + 1
             i = i + 1
-        #print(gameMap)
+        # print(gameMap)
         return gameMap
 
     def __init__(self):
@@ -62,3 +61,5 @@ class Map(object):
 
 class DungeonMap(Map):
     randomMap = []
+
+map = Map.__init__(object)
