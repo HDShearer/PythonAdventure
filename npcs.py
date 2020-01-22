@@ -81,7 +81,6 @@ class generateNPCs(object):
             noshopkeeper = False
         else:
             my_occupation = 'peasant'
-
         return my_occupation
 
     def generateName(self, name=NAME):
