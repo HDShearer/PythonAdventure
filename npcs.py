@@ -82,8 +82,6 @@ class generateNPCs(object):
         else:
             my_occupation = 'peasant'
 
-        NOBLACKSMITH = noblacksmith
-        NOSHOPKEEPER = noshopkeeper
         return my_occupation
 
     def generateName(self, name=NAME):
