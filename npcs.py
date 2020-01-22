@@ -127,3 +127,6 @@ class generateNPCs(object):
 
 class run(object):
     generateNPCs.__init__(object)
+
+class interact(object):
+    pass
