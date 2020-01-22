@@ -3,8 +3,10 @@ import random as rdm
 import map
 import numpy as np
 import pandas as pds
-_MAP = map.Map.loadMap(object)
 import rooms as rms
+
+
+_MAP = map.Map.loadMap(object)
 
 OCCUPATIONS = ['blacksmith', 'shopkeeper', 'peasant', ]
 
@@ -61,6 +63,8 @@ class generateNPCs(object):
             return my_occupation
         elif my_occupation == 'shopkeeper' and NOSHOPKEEPER == True:
             NOSHOPKEEPER = False
+
+
 NOBLACKSMITH = True
 NOSHOPKEEPER = True
 
@@ -73,13 +77,14 @@ class generateNPCs(object):
             return my_occupation
         elif my_occupation == 'blacksmith' and noblacksmith == False:
             my_occupation = 'peasant'
-            return my_occupation
         elif my_occupation == 'shopkeeper' and noshopkeeper == True:
             noshopkeeper = False
-            return my_occupation
         else:
             my_occupation = 'peasant'
-            return my_occupation
+
+        NOBLACKSMITH = noblacksmith
+        NOSHOPKEEPER = noshopkeeper
+        return my_occupation
 
     def generateName(self, name=NAME):
         return name[rdm.randrange(0, len(name))]
