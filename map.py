@@ -11,6 +11,8 @@ def file_length(fname):
             pass
     return i
 
+#"‎‎⠀"
+
 def line_length(fname):
     mapEnv = open("mapstate.txt", "r")
     mapLines = mapEnv.readlines()
@@ -35,14 +37,17 @@ class Map(object):
             roomList.pop()
             x = 0
             for room in roomList:
-                gameMap[i, x] = roomList[x]
+				if roomList[x] != 0:
+                	gameMap[i, x] = roomList[x]
+				else:
+					gameMap[i, x] = "⠀"
                 x = x + 1
             i = i + 1
         print(gameMap)
 
-    #def generate(self):
-     #   for row in gameMap:
-      #      pass
+    def generate(self):
+        for row in gameMap:
+            pass
 
 
 
