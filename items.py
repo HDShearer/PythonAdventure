@@ -69,7 +69,7 @@ class Other(Item):
 class inventory(object):
     def readInventory(self):
         return
-        Inventory = dict
+        inventory = dict
         inventorySave = open('inventory.text', 'r')
         inventoryState = inventorySave.readline()
         count = list(len(inventoryState))
