@@ -3,7 +3,7 @@ import random as r
 from colorama import Fore, Style
 
 import enemies as E
-import items as I
+# import items as I
 import rooms as R
 
 global roomIn
