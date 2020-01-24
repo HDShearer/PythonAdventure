@@ -124,7 +124,7 @@ class Game:
             pass
 
     def init(self):
-        Game.clearScreen(Game)
+        Game.clearScreen()
         Game.setupGame()
         P.Player.inv.clear()
 
