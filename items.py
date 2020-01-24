@@ -20,8 +20,9 @@ class Item(object):
             # attempts to generate a random item until it is a weapon
             while True:
                 itemsKeysAsList = random.choice(list(items.keys()))
-                _name = items[itemsKeysAsList]
-                name = _name
+                # I used the same name for 3 different variables. This is called mental efficiency and is
+                # a good trait to have.
+                name = items[itemsKeysAsList]
                 print(name[0])
                 if name[0] == 0:
                     break
@@ -30,8 +31,7 @@ class Item(object):
         elif type == 1:
             while True:
                 itemsKeysAsList = random.choice(list(items.keys()))
-                _name = items[itemsKeysAsList]
-                name = _name
+                name = items[itemsKeysAsList]
                 if name[0] == 1:
                     break
                 else:
@@ -39,8 +39,7 @@ class Item(object):
         elif type == 2:
             while True:
                 itemsKeysAsList = random.choice(list(items.keys()))
-                _name = items[itemsKeysAsList]
-                name = _name
+                name = items[itemsKeysAsList]
                 if name[0] == 2:
                     break
                 else:
@@ -67,13 +66,15 @@ class Other(Item):
     pass
 
 
-class inventory(object, Item):
-    Inventory = dict
-    inventorySave = open('inventory.text', 'r')
-    inventoryState = inventorySave.readline()
-    count = list(len(inventoryState))
-    for lines in inventoryState:
-        Inventory[count] = str(lines)
+class inventory(object):
+    def readInventory(self):
+        return
+        Inventory = dict
+        inventorySave = open('inventory.text', 'r')
+        inventoryState = inventorySave.readline()
+        count = list(len(inventoryState))
+        for lines in inventoryState:
+            Inventory[count] = str(lines)
 
 
 Item.__init__(object)
