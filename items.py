@@ -11,6 +11,7 @@ items = {"sword": [0, "A sharp hunk of metal, perfect for decapitating enemies!"
                        "for adventuring.", 10], 'leather armour': [3, 'A simple set of armour made from cheap hide. '
                                                                       'It does not offer much defence.', 3]}
 global Inventory
+# for debugging
 Inventory = {0: 'test'}
 
 
@@ -58,8 +59,12 @@ class inventory(object):
 
     def saveInventory(self):
         try:
-            inventoryWriter = open('inventory.txt', 'w')
-            inventoryWriter.write(str(Inventory))
+            inventory_writer = open('inventory.txt', 'w')
+            count = 0
+            for entries in Inventory:
+                inventory_writer.write(Inventory[count])
+                inventory_writer.write('\n')
+                count + 1
 
         except IOError:
             print('Error writing to inventory.txt. Type save to try again')
@@ -67,14 +72,17 @@ class inventory(object):
 
     def readInventory(self):
         count = 0
-        inventoryLoad = open('inventory.text', 'r')
-        inventoryState = list(inventoryLoad.readlines())
-        count = list(len(inventoryState))
-        for line in inventoryState:
+        inventory_load = open('inventory.txt', 'r')
+        inventory_state = list(inventory_load.readlines())
+        count = 0
+        for line in inventory_state:
             Inventory[count]: line
             count = count + 1
+        # for debugging
+        print(Inventory)
         return Inventory
 
 
 # for debugging
 inventory.saveInventory(object)
+inventory.readInventory(object)
