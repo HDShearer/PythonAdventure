@@ -1,7 +1,7 @@
 import random
 
 # why'd you have to make it dictionaries?
-category = {"weapon": 0, "key": 1, 'food': 2}
+category = {"weapon": 0, "key": 1, 'food': 2, 'armour': 3}
 
 # name: {(type), "description", (stat)} ## stat is dependant on the type. A weapon (0) would have a damage stat. A
 # key (1) has a stat that unlocks a lock of the corresponding value, food (2) is health restored, etc.
@@ -18,36 +18,19 @@ Inventory = {0: 'test'}
 class Item(object):
     # returns a randomItemKey object
     def generateItem(self):
-        randomItemKey = None
+        random_item_key = None
         LIST = random.choice(list(category.keys()))
         type = category[LIST]
-        if type == 0:
-            # attempts to generate a random item until it is a weapon
-            while True:
-                randomItemKey = random.choice(list(items.keys()))
-                name = items[randomItemKey]
-                print(name[0])
-                if name[0] == 0:
-                    break
-                else:
-                    continue
-        elif type == 1:
-            while True:
-                randomItemKey = random.choice(list(items.keys()))
-                name = items[randomItemKey]
-                if name[0] == 1:
-                    break
-                else:
-                    continue
-        elif type == 2:
-            while True:
-                randomItemKey = random.choice(list(items.keys()))
-                name = items[randomItemKey]
-                if name[0] == 2:
-                    break
-                else:
-                    continue
-        return randomItemKey
+        # attempts to generate a random item until it is the matching type
+        while True:
+            random_item_key = random.choice(list(items.keys()))
+            name = items[random_item_key]
+            print(name[0])
+            if name[0] == type:
+                break
+            else:
+                continue
+        return random_item_key
 
     def __init__(self):
         Item.generateItem(object)
