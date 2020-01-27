@@ -11,8 +11,7 @@ items = {"sword": [0, "A sharp hunk of metal, perfect for decapitating enemies!"
                        "for adventuring.", 10], 'leather armour': [3, 'A simple set of armour made from cheap hide. '
                                                                       'It does not offer much defence.', 3]}
 global Inventory
-# for debugging
-Inventory = {0: 'test'}
+Inventory = dict
 
 
 class Item(object):
@@ -47,7 +46,7 @@ class inventory(object):
             for entries in Inventory:
                 inventory_writer.write(Inventory[count])
                 inventory_writer.write('\n')
-                count + 1
+                count += 1
 
         except IOError:
             print('Error writing to inventory.txt. Type save to try again')
@@ -60,12 +59,7 @@ class inventory(object):
         count = 0
         for line in inventory_state:
             Inventory[count]: line
-            count = count + 1
+            count += 1
         # for debugging
         print(Inventory)
         return Inventory
-
-
-# for debugging
-inventory.saveInventory(object)
-inventory.readInventory(object)
