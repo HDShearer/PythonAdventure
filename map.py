@@ -26,7 +26,8 @@ class Map(object):
     def __init__(self):
         yL = file_length("mapstate.txt")
         xL = line_length("mapstate.txt")
-        gameMap = numpy.zeros((yL, xL))
+        global gameMap
+        gameMap = numpy.zeros((yL, xL), dtype=object)
         remove_newlines("mapstate.txt")
         mapEnv = open("mapstate.txt", "r")
         mapLines = mapEnv.readlines()
@@ -37,17 +38,21 @@ class Map(object):
             roomList.pop()
             x = 0
             for room in roomList:
-				if roomList[x] != 0:
-                	gameMap[i, x] = roomList[x]
-				else:
-					gameMap[i, x] = "⠀"
+                number = roomList[x]
+                gameMap[i, x] = number
+                x = x + 1
+            x = 0
+            for room in roomList:
+                if int(gameMap[i, x]) == 0:
+                    gameMap[i, x] = "⠀"
                 x = x + 1
             i = i + 1
         print(gameMap)
 
     def generate(self):
         for row in gameMap:
-            pass
+            for item in row:
+                pass
 
 
 
