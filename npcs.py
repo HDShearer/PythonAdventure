@@ -2,9 +2,6 @@
 import random as rdm
 import map
 import numpy as np
-import pandas as pds
-import rooms as rms
-
 
 _MAP = map.Map.loadMap(object)
 
@@ -47,86 +44,61 @@ NAME = [
 ]
 
 
-
-class generateNPCs(object):
-
-    def generateOccupation(self):
-        NOBLACKSMITH = True
-        NOSHOPKEEPER = True
-
-        my_occupation = OCCUPATIONS[rdm.randrange(0, len(OCCUPATIONS))]
-        if my_occupation == 'blacksmith' and NOBLACKSMITH == True:
-            NOBLACKSMITH = False
-            return my_occupation
-        elif my_occupation == 'blacksmith' and NOBLACKSMITH == False:
-            my_occupation = 'peasant'
-            return my_occupation
-        elif my_occupation == 'shopkeeper' and NOSHOPKEEPER == True:
-            NOSHOPKEEPER = False
+def generateName():
+    return NAME[rdm.randrange(0, len(NAME))]
 
 
-NOBLACKSMITH = True
-NOSHOPKEEPER = True
+def generateLocation():
+    MAP = _MAP
+    MAP_X = rdm.randrange(0, len(MAP))
+    MAP_Y = rdm.randrange(0, len(MAP[0]))
+    MAP_XY = [MAP_X, MAP_Y]
+    return MAP_XY
 
 
-class generateNPCs(object):
-    def generateOccupation(self, noblacksmith=NOBLACKSMITH, noshopkeeper=NOSHOPKEEPER):
-        my_occupation = OCCUPATIONS[rdm.randrange(0, len(OCCUPATIONS))]
-        if my_occupation == 'blacksmith' and noblacksmith == True:
-            noblacksmith = False
-            return my_occupation
-        elif my_occupation == 'blacksmith' and noblacksmith == False:
-            my_occupation = 'peasant'
-        elif my_occupation == 'shopkeeper' and noshopkeeper == True:
-            noshopkeeper = False
-        else:
-            my_occupation = 'peasant'
-        return my_occupation
+def generate_number_of_npcs():
+    return rdm.randrange(2, 6)
 
-    def generateName(self, name=NAME):
-        return name[rdm.randrange(0, len(name))]
 
-    def generateLocation(self):
-        MAP = _MAP
-        MAP_X = rdm.randrange(0, len(MAP))
-        MAP_Y = rdm.randrange(0, len(MAP[0]))
-        MAP_XY = [MAP_X, MAP_Y]
-        return MAP_XY
+def generateOccupation():
+    my_occupation = OCCUPATIONS[rdm.randrange(0, len(OCCUPATIONS))]
+    return my_occupation
 
-    def generate_number_of_npcs(self):
-        return rdm.randrange(2, 5)
 
-    def generateNPC(self):
-        I = generateNPCs.generate_number_of_npcs(object)
-        i = I
-        count = 0
+def generateNPCs():
+    I = generate_number_of_npcs()
+    i = I
+    count = 0
 
-        npcOccupations = dict
-        npcNames = dict
-        npcLocations_X = dict
-        npcLocations_Y = dict
+    npcOccupations = {0: 0}
+    npcNames = {0: 0}
+    npcLocations_X = {0: 0}
+    npcLocations_Y = {0: 0}
 
-        while not i == 0:
-            npcOccupations[count]: generateNPCs.generateOccupation(object)
-            npcNames[count]: generateNPCs.generateName(object)
-            map_xy = generateNPCs.generateLocation(object)
-            npcLocations_X[count]: int(map_xy[1])
-            npcLocations_Y[count]: int(map_xy[2])
-            i = i - 1
-            count = count + 1
-            print(i)
+    while i >= 0:
+        npcOccupations.update({count: generateOccupation()})
+        npcNames.update({count: generateName()})
+        map_xy = generateLocation()
+        npcLocations_X.update({count: int(map_xy[0])})
+        npcLocations_Y.update({count: int})
+        print(npcOccupations[count])
+        temp = count - 1
+        while temp >= 0:
+            print(temp)
+            if npcOccupations[temp] == 'blacksmith' and npcOccupations[count] == 'blacksmith':
+                npcOccupations[count] = 'peasant'
+                print(npcOccupations[count])
+            elif npcOccupations[temp] == 'shopkeeper' and npcOccupations[count] == 'shopkeeper':
+                npcOccupations[count] = 'peasant'
+                print(npcOccupations[count])
+            temp = temp - 1
 
-        npcLocations = np.meshgrid(npcLocations_X, npcLocations_Y)
-        return npcNames, npcOccupations, npcLocations
+        count = count + 1
+        i = i - 1
 
-    def run(self):
-        return generateNPCs.generateNPC(object)
+    npcLocations = np.meshgrid(npcLocations_X, npcLocations_Y)
+    return npcNames, npcOccupations, npcLocations
 
-    def __init__(self):
-        generateNPCs.generateNPC(object)
-
-class run(object):
-    generateNPCs.__init__(object)
 
 class interact(object):
     pass
