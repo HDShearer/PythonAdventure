@@ -1,5 +1,5 @@
 import numpy
-
+import mainPlayer as Player
 
 def remove_newlines(fname):
     flist = open(fname).readlines()
@@ -43,23 +43,40 @@ class Map(object):
             # print(roomList)
             x = 0
             for room in roomList:
-                # print(roomList[x])
+
+
+
+
+
+
+
+
+
+
+
                 gameMap[i, x] = roomList[x]
+                if int(gameMap[i, x]) == 0:
+                    gameMap[i, x] = "⠀"
                 x = x + 1
             i = i + 1
-        # print(gameMap)
-        return gameMap
 
-    def __init__(self):
-        Map.loadMap(object)
 
     #def generate(self):
      #   for row in gameMap:
       #      pass
+
+    def showMap(self):
+        printMap = gameMap
+        printMap[Player.Player.y, Player.Player.x] = "P"
+        print(printMap)
+        print("The P indicates where you are.")
+
+
+
+
 
 
 
 class DungeonMap(Map):
     randomMap = []
 
-map = Map.__init__(object)
