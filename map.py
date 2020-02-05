@@ -38,11 +38,7 @@ class Map(object):
             roomList.pop()
             x = 0
             for room in roomList:
-                number = roomList[x]
-                gameMap[i, x] = number
-                x = x + 1
-            x = 0
-            for room in roomList:
+                gameMap[i, x] = roomList[x]
                 if int(gameMap[i, x]) == 0:
                     gameMap[i, x] = "⠀"
                 x = x + 1
