@@ -74,6 +74,7 @@ def generateNPCs():
     npcNames = {0: 0}
     npcLocations_X = {0: 0}
     npcLocations_Y = {0: 0}
+    myID = []
 
     while i >= 0:
         npcOccupations.update({count: generateOccupation()})
@@ -81,24 +82,18 @@ def generateNPCs():
         map_xy = generateLocation()
         npcLocations_X.update({count: int(map_xy[0])})
         npcLocations_Y.update({count: int})
+        myID.append(count)
         print(npcOccupations[count])
         temp = count - 1
         while temp >= 0:
-            print(temp)
             if npcOccupations[temp] == 'blacksmith' and npcOccupations[count] == 'blacksmith':
                 npcOccupations[count] = 'peasant'
-                print(npcOccupations[count])
             elif npcOccupations[temp] == 'shopkeeper' and npcOccupations[count] == 'shopkeeper':
                 npcOccupations[count] = 'peasant'
-                print(npcOccupations[count])
             temp = temp - 1
 
         count = count + 1
         i = i - 1
 
     npcLocations = np.meshgrid(npcLocations_X, npcLocations_Y)
-    return npcNames, npcOccupations, npcLocations
-
-
-class interact(object):
-    pass
+    return npcNames, npcOccupations, npcLocations, myID
