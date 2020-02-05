@@ -1,5 +1,6 @@
 import os
 import random as r
+import map as M
 
 from colorama import Fore, Style
 
@@ -9,7 +10,7 @@ import mainPlayer as P
 
 # Define all variables, lists, etc
 
-actions = {"look": "Look", "go": "Go", "clear": "Clear", "help": "Help", "attack": "Attack", }
+actions = {"look": "Look", "go": "Go", "clear": "Clear", "help": "Help", "attack": "Attack", "map": "Map"}
 
 global currentPlayer
 PlayerNotDead = True
@@ -79,10 +80,12 @@ class Game:
                 Game.setupGame()
         print(f"Rise {P.Name} the {Race} {Class}. The kingdom needs you!")
 
-    def UpdateGame(self):
+    @staticmethod
+    def UpdateGame():
         pass
 
-    def Help(self):
+    @staticmethod
+    def Help():
         print("\n")
         for action in actions:
             currentAction = actions[action]
@@ -97,23 +100,27 @@ class Game:
         print(Style.RESET_ALL + "Plain text designates commands you enter.")
         print(Style.RESET_ALL)
 
-    def TakeInput(self, x):
+    @staticmethod
+    def TakeInput(x):
         x = x.lower()
         args = x.split(' ')
         length = len(args)
         if args[0] in actions:
             if args[0] == "look":
-                P.Player.Look(args[length - 1])
+                P.Player.Look(currentPlayer, args[length - 1])
             elif args[0] == "clear":
                 Game.clearScreen()
             elif args[0] == "help":
                 Game.Help()
             elif args[0] == "attack":
-                P.Player.Attack(args[length - 1])
+                P.Player.Attack(currentPlayer, args[length - 1])
+            elif args[0] == "map":
+                M.Map.showMap(map)
             else:
                 print(Fore.RED + "I don't know what you mean")
                 print(Style.RESET_ALL)
 
+    @staticmethod
     def RandomEncounter(Monster):
         # add individual monster noises)
         EnemyRoll = r.randint(0, 20)
@@ -123,16 +130,20 @@ class Game:
         else:
             pass
 
-    def init(self):
+    @staticmethod
+    def initiate():
         Game.clearScreen()
         Game.setupGame()
         P.Player.inv.clear()
+        map = M.Map()
 
-    def MainLoop(self):
-        Game.UpdateGame(Game)
-        Game.TakeInput(Game, input("> "))
+    @staticmethod
+    def MainLoop():
+        Game.UpdateGame()
+        Game.TakeInput(input("> "))
 
-    def GetLoot(self, Monster, DC):
+    @staticmethod
+    def GetLoot(Monster, DC):
         DC = int(DC)
         if DC % 2 == 0:
             lowBound = int(DC / 2)
@@ -147,6 +158,6 @@ class Game:
 
 
 # run game
-Game.init(Game)
-while quit == False:
-    Game.MainLoop(Game)
+Game.initiate()
+while gameQuit == False:
+    Game.MainLoop()
