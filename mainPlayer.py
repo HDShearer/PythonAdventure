@@ -1,13 +1,15 @@
 import random as r
+import items as I
 
 from colorama import Fore, Style
 
 import enemies as E
-import items as I
+# import items as I
 import rooms as R
 
 global roomIn
-
+global x
+global y
 
 class Player(object):
     roomName = "spawn"
@@ -21,6 +23,8 @@ class Player(object):
     inv = {}
     gold = 0
     Name = ""
+    x = 3
+    y = 6
 
     def getLoot(self, x, DC):
         pass
@@ -63,7 +67,7 @@ class Player(object):
             print(Fore.RED + "Attack what?")
             print(Style.RESET_ALL)
 
-    def Look(x):
+    def Look(self, x):
         print(Fore.GREEN)
         if x == "look":
             x = roomIn
