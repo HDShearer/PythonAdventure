@@ -1,7 +1,7 @@
 import os
 import random as r
 from map import *
-
+import rooms as rms
 from PyQt5 import QtCore, QtGui, QtWidgets
 from colorama import Fore, Style
 import mainPlayer as P
@@ -225,13 +225,10 @@ class Ui_MainWindow(object):
             if args[0] == "look":
                 print("looking")
                 P.Player.Look(currentPlayer, args[length - 1])
-                print("Working 1")
-                print(P.Player.lookObject)
-                Output = P.Player.lookObject
-                print("Working 2")
+                Output = P.Player.Look(object, args[0])
                 print(Output)
-                main.Ui_MainWindow.tb.append(Output)
-                lineEdit.clear()
+                tb.append(str(rms.descriptions[Output[1]]))
+                self.lineEdit.clear()
             elif args[0] == "clear":
                 Game.clearScreen()
             elif args[0] == "help":
