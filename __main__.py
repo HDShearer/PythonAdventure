@@ -1,9 +1,9 @@
 import os
 import random as r
-import map as M
+from map import *
 
+from PyQt5 import QtCore, QtGui, QtWidgets
 from colorama import Fore, Style
-
 import mainPlayer as P
 
 # print(Style.RESET_ALL)
@@ -13,6 +13,7 @@ import mainPlayer as P
 actions = {"look": "Look", "go": "Go", "clear": "Clear", "help": "Help", "attack": "Attack", "map": "Map"}
 
 global currentPlayer
+global Output
 PlayerNotDead = True
 EnemyNotDead = True
 turn = 0
@@ -100,25 +101,7 @@ class Game:
         print(Style.RESET_ALL + "Plain text designates commands you enter.")
         print(Style.RESET_ALL)
 
-    @staticmethod
-    def TakeInput(x):
-        x = x.lower()
-        args = x.split(' ')
-        length = len(args)
-        if args[0] in actions:
-            if args[0] == "look":
-                P.Player.Look(currentPlayer, args[length - 1])
-            elif args[0] == "clear":
-                Game.clearScreen()
-            elif args[0] == "help":
-                Game.Help()
-            elif args[0] == "attack":
-                P.Player.Attack(currentPlayer, args[length - 1])
-            elif args[0] == "map":
-                M.Map.showMap(map)
-            else:
-                print(Fore.RED + "I don't know what you mean")
-                print(Style.RESET_ALL)
+
 
     @staticmethod
     def RandomEncounter(Monster):
@@ -132,15 +115,16 @@ class Game:
 
     @staticmethod
     def initiate():
+        global map
         Game.clearScreen()
         Game.setupGame()
         P.Player.inv.clear()
-        map = M.Map()
+        map = Map()
 
     @staticmethod
     def MainLoop():
         Game.UpdateGame()
-        Game.TakeInput(input("> "))
+        #Ui_MainWindow.TakeInput()
 
     @staticmethod
     def GetLoot(Monster, DC):
@@ -156,8 +140,127 @@ class Game:
         else:
             pass
 
+class Ui_MainWindow(object):
+
+
+    global Output
+    global tb
+    global lineEdit
+
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(1206, 707)
+        MainWindow.setToolTip("")
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit.setGeometry(QtCore.QRect(10, 410, 1031, 22))
+        font = QtGui.QFont()
+        font.setFamily("Courier New")
+        font.setPointSize(9)
+        self.lineEdit.setFont(font)
+        self.lineEdit.setFocusPolicy(QtCore.Qt.StrongFocus)
+        self.lineEdit.setObjectName("lineEdit")
+        self.textBrowser = QtWidgets.QTextBrowser(self.centralwidget)
+        self.textBrowser.setEnabled(True)
+        self.textBrowser.setGeometry(QtCore.QRect(10, 10, 1031, 391))
+        font = QtGui.QFont()
+        font.setFamily("Courier New")
+        font.setPointSize(9)
+        self.textBrowser.setFont(font)
+        self.textBrowser.setObjectName("textBrowser")
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1206, 26))
+        self.menubar.setObjectName("menubar")
+        self.menuFile = QtWidgets.QMenu(self.menubar)
+        self.menuFile.setObjectName("menuFile")
+        self.menuEdit = QtWidgets.QMenu(self.menubar)
+        self.menuEdit.setObjectName("menuEdit")
+        MainWindow.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setObjectName("statusbar")
+        MainWindow.setStatusBar(self.statusbar)
+        self.actionSave_Game = QtWidgets.QAction(MainWindow)
+        self.actionSave_Game.setObjectName("actionSave_Game")
+        self.actionLoad_Game = QtWidgets.QAction(MainWindow)
+        self.actionLoad_Game.setObjectName("actionLoad_Game")
+        self.actionEnter_current_command = QtWidgets.QAction(MainWindow)
+        self.actionEnter_current_command.setObjectName("actionEnter_current_command")
+        self.menuFile.addAction(self.actionSave_Game)
+        self.menuFile.addAction(self.actionLoad_Game)
+        self.menuFile.addSeparator()
+        self.menuEdit.addAction(self.actionEnter_current_command)
+        self.menubar.addAction(self.menuFile.menuAction())
+        self.menubar.addAction(self.menuEdit.menuAction())
+
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+        self.actionEnter_current_command.triggered.connect(lambda: self.appendTB(self.lineEdit.text()))
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.lineEdit.setPlaceholderText(_translate("MainWindow", "Type Here"))
+        self.menuFile.setTitle(_translate("MainWindow", "File"))
+        self.menuEdit.setTitle(_translate("MainWindow", "Edit"))
+        self.actionSave_Game.setText(_translate("MainWindow", "Save Game"))
+        self.actionSave_Game.setToolTip(_translate("MainWindow", "Save Game"))
+        self.actionSave_Game.setShortcut(_translate("MainWindow", "Ctrl+S"))
+        self.actionLoad_Game.setText(_translate("MainWindow", "Load Game"))
+        self.actionEnter_current_command.setText(_translate("MainWindow", "Enter current command"))
+        self.actionEnter_current_command.setShortcut(_translate("MainWindow", "Return"))
+
+    def appendTB(self, text):
+        tb = self.textBrowser
+        self.playerLastInput = text
+        print(self.playerLastInput)
+        x = self.playerLastInput
+        x = x.lower()
+        args = x.split(' ')
+        length = len(args)
+        print (args)
+        if args[0] in actions:
+            if args[0] == "look":
+                print("looking")
+                P.Player.Look(currentPlayer, args[length - 1])
+                print("Working 1")
+                print(P.Player.lookObject)
+                Output = P.Player.lookObject
+                print("Working 2")
+                print(Output)
+                main.Ui_MainWindow.tb.append(Output)
+                lineEdit.clear()
+            elif args[0] == "clear":
+                Game.clearScreen()
+            elif args[0] == "help":
+                Game.Help()
+            elif args[0] == "attack":
+                P.Player.Attack(currentPlayer, args[length - 1])
+            elif args[0] == "map":
+                print("yeet")
+                map.showMap()
+        else:
+            print(Fore.RED + "I don't know what you mean")
+            print(Style.RESET_ALL)
+            Output = "I don't know what you mean"
+            tb.append(Output)
+            self.lineEdit.clear()
+
+
 
 # run game
 Game.initiate()
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())
+
 while gameQuit == False:
     Game.MainLoop()

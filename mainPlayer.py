@@ -1,9 +1,9 @@
 import random as r
-
+import __main__ as main
 from colorama import Fore, Style
 
 import enemies as E
-# import items as I
+import items as I
 import rooms as R
 
 global roomIn
@@ -72,13 +72,16 @@ class Player(object):
             x = roomIn
             print(R.rooms[x])
             print(Style.RESET_ALL)
-        elif x in I.items:
-            print(I.items[x])
-            print(Style.RESET_ALL)
+            global lookObject
+            lookObject = "What?"
+        #elif x in I.items:
+            #print(I.items[x])
+            #print(Style.RESET_ALL)
         elif x in E.monsters:
             print(E.monsters[x])
             print(Style.RESET_ALL)
         else:
+            lookObject = "What?"
             print(Fore.RED + "What?")
             print(Style.RESET_ALL)
 
