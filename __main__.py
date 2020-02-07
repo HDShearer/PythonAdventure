@@ -101,8 +101,6 @@ class Game:
         print(Style.RESET_ALL + "Plain text designates commands you enter.")
         print(Style.RESET_ALL)
 
-
-
     @staticmethod
     def RandomEncounter(Monster):
         # add individual monster noises)
@@ -124,7 +122,7 @@ class Game:
     @staticmethod
     def MainLoop():
         Game.UpdateGame()
-        #Ui_MainWindow.TakeInput()
+        # Ui_MainWindow.TakeInput()
 
     @staticmethod
     def GetLoot(Monster, DC):
@@ -140,9 +138,8 @@ class Game:
         else:
             pass
 
+
 class Ui_MainWindow(object):
-
-
     global Output
     global tb
     global lineEdit
@@ -220,21 +217,21 @@ class Ui_MainWindow(object):
         x = x.lower()
         args = x.split(' ')
         length = len(args)
-        print (args)
+        print(args)
+        Output = None
         if args[0] in actions:
             if args[0] == "look":
                 print("looking")
                 P.Player.Look(currentPlayer, args[length - 1])
-                Output = P.Player.Look(object, args[0])
+                Output = str(rms.descriptions[Output[1]])
                 print(Output)
-                tb.append(str(rms.descriptions[Output[1]]))
-                self.lineEdit.clear()
+
             elif args[0] == "clear":
                 Game.clearScreen()
             elif args[0] == "help":
                 Game.Help()
             elif args[0] == "attack":
-                P.Player.Attack(currentPlayer, args[length - 1])
+                Output = P.Player.Attack(currentPlayer, args[length - 1])
             elif args[0] == "map":
                 print("yeet")
                 map.showMap()
@@ -242,9 +239,11 @@ class Ui_MainWindow(object):
             print(Fore.RED + "I don't know what you mean")
             print(Style.RESET_ALL)
             Output = "I don't know what you mean"
-            tb.append(Output)
-            self.lineEdit.clear()
-
+        try:
+            tb.append('Game: ' + str(Output[length]))
+        except IndexError:
+            tb.append('Game: No such target found')
+        self.lineEdit.clear()
 
 
 # run game
@@ -252,6 +251,7 @@ Game.initiate()
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()

@@ -38,6 +38,7 @@ class Player(object):
         EnemyNotDead = True
         PlayerNotDead = True
         attack = True
+        Output = None
         if x in E.monsters:
             if attack == True:
                 if PlayerNotDead and EnemyNotDead:
@@ -48,8 +49,10 @@ class Player(object):
                         damageDealt += self.damage
                         Enemy.HP -= damageDealt
                         print(Fore.YELLOW + f"You did {damageDealt} damage to the {x}")
+                        Output = f"You did {damageDealt} damage to the {x}"
                         if Enemy.HP <= 0:
                             print(f"You killed the {x}!")
+                            Output = f"You killed the {x}!"
                             EnemyNotDead = False
                             attack = False
                             print(Style.RESET_ALL)
@@ -58,13 +61,17 @@ class Player(object):
                     else:
                         print(Fore.YELLOW + "It hit the armor.")  # hit armor
                 else:
+                    Output = 'You won!'
                     pass  # end combat
             else:
+                Output = "There is nothing to attack!"
                 print(Fore.RED + "There is nothing to attack!")
                 print(Style.RESET_ALL)
         else:
             print(Fore.RED + "Attack what?")
+            Output = "Attack what?"
             print(Style.RESET_ALL)
+        return 0, Output
 
     def Look(self, x):
         global lookObject
