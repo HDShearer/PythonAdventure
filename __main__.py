@@ -147,6 +147,12 @@ class Ui_MainWindow(object):
     global tb
     global lineEdit
 
+    def printToUI(self, Input, Output):
+        tb.append(Input)
+        self.lineEdit.clear()
+        tb.append(Output)
+        self.lineEdit.clear()
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1206, 707)
