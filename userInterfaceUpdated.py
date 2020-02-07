@@ -11,6 +11,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_MainWindow(object):
+    global playerLastInput
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1206, 707)
@@ -61,7 +63,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        self.actionEnter_current_command.triggered.connect(lambda: self.appendTB('test'))
+        self.actionEnter_current_command.triggered.connect(lambda: self.appendTB(self.lineEdit.text()))
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -78,6 +80,7 @@ class Ui_MainWindow(object):
 
     def appendTB(self, text):
         tb = self.textBrowser
+        self.playerLastInput = text
         tb.append('(current player will be here): ' + text)
         self.lineEdit.clear()
 
