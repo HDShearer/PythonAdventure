@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
-        MainWindow.setObjectName("Adventure Game")
+        MainWindow.setObjectName("MainWindow")
         MainWindow.resize(985, 535)
         MainWindow.setToolTip("")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -33,28 +33,37 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
         self.actionSave_Game = QtWidgets.QAction(MainWindow)
         self.actionSave_Game.setObjectName("actionSave_Game")
+        self.actionChange_Color = QtWidgets.QAction(MainWindow)
+        self.actionChange_Color.setObjectName("actionChange_Color")
+        self.actionChange_Font = QtWidgets.QAction(MainWindow)
+        self.actionChange_Font.setObjectName("actionChange_Font")
         self.actionLoad_Game = QtWidgets.QAction(MainWindow)
         self.actionLoad_Game.setObjectName("actionLoad_Game")
         self.menuFile.addAction(self.actionSave_Game)
         self.menuFile.addAction(self.actionLoad_Game)
         self.menuFile.addSeparator()
+        self.menuEdit.addAction(self.actionChange_Color)
+        self.menuEdit.addAction(self.actionChange_Font)
+        self.menuEdit.addSeparator()
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuEdit.menuAction())
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        self.actionSave_Game.triggered.connect(lambda: self.updateTB('save was clicked'))
+        self.actionSave_Game.triggered.connect(lambda: self.updateTB('Saving...'))
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Adventure Game"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.menuEdit.setTitle(_translate("MainWindow", "Edit"))
         self.actionSave_Game.setText(_translate("MainWindow", "Save Game"))
         self.actionSave_Game.setToolTip(_translate("MainWindow", "Save Game"))
         self.actionSave_Game.setShortcut(_translate("MainWindow", "Ctrl+S"))
         self.actionLoad_Game.setText(_translate("MainWindow", "Load Game"))
+        self.actionChange_Color.setText(_translate("MainWindow", "Change Color"))
+        self.actionChange_Font.setText(_translate("MainWindow", "Change Font"))
 
     def updateTB(self, text):
         tb = self.textBrowser
