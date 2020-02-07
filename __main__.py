@@ -226,12 +226,17 @@ class Ui_MainWindow(object):
                 print("looking")
                 P.Player.Look(currentPlayer, args[length - 1])
                 print("Working 1")
+                Output = "huh"
+                print(Output)
+                tb.append(Output)
+                self.lineEdit.clear()
+                print("hi")
                 print(P.Player.lookObject)
                 Output = P.Player.lookObject
                 print("Working 2")
                 print(Output)
-                main.Ui_MainWindow.tb.append(Output)
-                lineEdit.clear()
+                tb.append(Output)
+                self.lineEdit.clear()
             elif args[0] == "clear":
                 Game.clearScreen()
             elif args[0] == "help":
