@@ -67,12 +67,12 @@ class Player(object):
             print(Style.RESET_ALL)
 
     def Look(self, x):
+        global lookObject
         print(Fore.GREEN)
         if x == "look":
             x = roomIn
             print(R.rooms[x])
             print(Style.RESET_ALL)
-            global lookObject
             lookObject = "What?"
         #elif x in I.items:
             #print(I.items[x])
@@ -84,6 +84,7 @@ class Player(object):
             lookObject = "What?"
             print(Fore.RED + "What?")
             print(Style.RESET_ALL)
+        return lookObject, roomIn
 
 
 class Elf(Player):
