@@ -61,7 +61,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        self.actionEnter_current_command.triggered.connect(lambda: self.appendTB('test'))
+        self.actionEnter_current_command.triggered.connect(lambda: self.appendTB(self.lineEdit.text()))
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
