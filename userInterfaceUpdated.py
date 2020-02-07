@@ -79,6 +79,7 @@ class Ui_MainWindow(object):
     def appendTB(self, text):
         tb = self.textBrowser
         tb.append('(current player will be here): ' + text)
+        self.lineEdit.clear()
 
 
 if __name__ == "__main__":
