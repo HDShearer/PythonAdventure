@@ -32,7 +32,8 @@ class Enemy(object):
             print(f"The {self.Type} missed you.")
 
 
-class Goblin(Enemy):
+class goblin(Enemy):
+    Type = "goblin"
     def __init__(self):
         self.HP = R.randint(1, 6)
         self.damagelow = 1
@@ -41,10 +42,10 @@ class Goblin(Enemy):
         self.armor = 15
         self.RollMod = 4
         self.BattleCry = "The goblin charges out of the brush! ...And then trips. Prepare to fight!"
-        self.Type = "Goblin"
+        self.Type = "goblin"
 
 
-class BugBear(Enemy):
+class bugbear(Enemy):
     def __init__(self):
         for i in range(0, 4):
             self.HP += R.randint(1, 8)
@@ -55,4 +56,4 @@ class BugBear(Enemy):
         self.armor = 16
         self.RollMod = 4
         self.BattleCry = "ROARRRRRRRRR"
-        self.Type = "Goblin"
+        self.Type = "goblin"

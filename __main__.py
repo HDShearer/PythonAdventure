@@ -212,37 +212,34 @@ class Ui_MainWindow(object):
     def appendTB(self, text):
         tb = self.textBrowser
         self.playerLastInput = text
-        print(self.playerLastInput)
         x = self.playerLastInput
         x = x.lower()
         args = x.split(' ')
         length = len(args)
-        print(args)
-        Output = None
+        Output = []
         if args[0] in actions:
             if args[0] == "look":
-                print("looking")
                 P.Player.Look(currentPlayer, args[length - 1])
-                Output = str(rms.descriptions[Output[1]])
-                print(Output)
-
+                Output = str(rms.descriptions[length - 1])
             elif args[0] == "clear":
                 Game.clearScreen()
             elif args[0] == "help":
                 Game.Help()
             elif args[0] == "attack":
-                Output = P.Player.Attack(currentPlayer, args[length - 1])
+                #try:
+                attackEnemy = P.Player.Attack(currentPlayer, args[length - 1])
+                Output.append(attackEnemy)
+                #except:
+                    #Output = 'No such target found'
             elif args[0] == "map":
                 print("yeet")
                 map.showMap()
         else:
-            print(Fore.RED + "I don't know what you mean")
-            print(Style.RESET_ALL)
             Output = "I don't know what you mean"
-        try:
-            tb.append('Game: ' + str(Output[length]))
-        except IndexError:
-            tb.append('Game: No such target found')
+        if type(Output) == list:
+            tb.append('Game: ' + str(Output[0]))
+        else:
+            tb.append('Game: ' + str(Output))
         self.lineEdit.clear()
 
 
