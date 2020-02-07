@@ -1,15 +1,22 @@
 import numpy
+
+import __main__ as main
 import mainPlayer as Player
+
+global gameMap
+
 
 def remove_newlines(fname):
     flist = open(fname).readlines()
     return [s.rstrip('\n') for s in flist]
+
 
 def file_length(fname):
     with open(fname) as f:
         for i, l in enumerate(f, 1):
             pass
     return i
+
 
 def line_length(fname):
     mapEnv = open("mapstate.txt", "r")
@@ -20,6 +27,7 @@ def line_length(fname):
         roomList = cleanedLine.split(" ")
         roomList.pop()
         return len(roomList)
+
 
 class Map(object):
     def loadMap(self):
@@ -43,40 +51,25 @@ class Map(object):
             # print(roomList)
             x = 0
             for room in roomList:
-
-
-
-
-
-
-
-
-
-
-
                 gameMap[i, x] = roomList[x]
                 if int(gameMap[i, x]) == 0:
                     gameMap[i, x] = "⠀"
                 x = x + 1
             i = i + 1
 
+    # def generate(self):
+    #   for row in gameMap:
+    #      pass
+    @staticmethod
+    def showMap():
 
-    #def generate(self):
-     #   for row in gameMap:
-      #      pass
-
-    def showMap(self):
         printMap = gameMap
         printMap[Player.Player.y, Player.Player.x] = "P"
         print(printMap)
-        print("The P indicates where you are.")
-
-
-
-
-
+        main.Ui_MainWindow.Output = printMap
+        main.Ui_MainWindow.tb.append(main.Ui_MainWindow.Output)
+        main.Ui_MainWindow.lineEdit.clear()
 
 
 class DungeonMap(Map):
     randomMap = []
-
