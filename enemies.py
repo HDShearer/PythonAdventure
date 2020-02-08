@@ -25,7 +25,8 @@ class Enemy(object):
         self.damage += self.damagemod
         if self.Roll >= P.Player.HP:
             P.Player.HP -= self.damage
-            print(f"The {self.Type} does {self.damage} points of damage. You have {P.Player.HP} health left.")
+            print(
+                f"The {self.Type} does {self.damage} points of damage. You have {P.Player.HP} health left.")
             if P.Player.HP <= 0:
                 pass
         else:
@@ -34,6 +35,7 @@ class Enemy(object):
 
 class goblin(Enemy):
     Type = "goblin"
+
     def __init__(self):
         self.HP = R.randint(1, 6)
         self.damagelow = 1

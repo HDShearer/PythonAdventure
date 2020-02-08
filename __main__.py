@@ -10,7 +10,8 @@ import mainPlayer as P
 
 # Define all variables, lists, etc
 
-actions = {"look": "Look", "go": "Go", "clear": "Clear", "help": "Help", "attack": "Attack", "map": "Map"}
+actions = {"look": "Look", "go": "Go", "clear": "Clear",
+           "help": "Help", "attack": "Attack", "map": "Map"}
 
 global currentPlayer
 global Output
@@ -132,7 +133,8 @@ class Ui_MainWindow(object):
         self.actionLoad_Game = QtWidgets.QAction(MainWindow)
         self.actionLoad_Game.setObjectName("actionLoad_Game")
         self.actionEnter_current_command = QtWidgets.QAction(MainWindow)
-        self.actionEnter_current_command.setObjectName("actionEnter_current_command")
+        self.actionEnter_current_command.setObjectName(
+            "actionEnter_current_command")
         self.menuFile.addAction(self.actionSave_Game)
         self.menuFile.addAction(self.actionLoad_Game)
         self.menuFile.addSeparator()
@@ -143,7 +145,8 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        self.actionEnter_current_command.triggered.connect(lambda: self.appendTB(self.lineEdit.text()))
+        self.actionEnter_current_command.triggered.connect(
+            lambda: self.appendTB(self.lineEdit.text()))
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -155,8 +158,10 @@ class Ui_MainWindow(object):
         self.actionSave_Game.setToolTip(_translate("MainWindow", "Save Game"))
         self.actionSave_Game.setShortcut(_translate("MainWindow", "Ctrl+S"))
         self.actionLoad_Game.setText(_translate("MainWindow", "Load Game"))
-        self.actionEnter_current_command.setText(_translate("MainWindow", "Enter current command"))
-        self.actionEnter_current_command.setShortcut(_translate("MainWindow", "Return"))
+        self.actionEnter_current_command.setText(
+            _translate("MainWindow", "Enter current command"))
+        self.actionEnter_current_command.setShortcut(
+            _translate("MainWindow", "Return"))
 
     def appendTB(self, text):
         tb = self.textBrowser
@@ -171,10 +176,10 @@ class Ui_MainWindow(object):
             if args[0] == "look":
                 P.Player.Look(currentPlayer, args[length - 1])
                 Output = str(rms.descriptions[length - 1])
-            #elif args[0] == "clear":
-                #Game.clearScreen()
-            #elif args[0] == "help":
-                #Game.Help()
+            # elif args[0] == "clear":
+                # Game.clearScreen()
+            # elif args[0] == "help":
+                # Game.Help()
             elif args[0] == "attack":
                 attackEnemy = P.Player.Attack(currentPlayer, args[length - 1])
                 Output.append(attackEnemy)
@@ -235,6 +240,7 @@ class Ui_MainWindow(object):
             self.lineEdit.clear()
             Ui_MainWindow.setupGame()
         print(f"Rise {P.Player.Name} the {Race} {Class}. The kingdom needs you!")
+
 
 # run game
 if __name__ == "__main__":
