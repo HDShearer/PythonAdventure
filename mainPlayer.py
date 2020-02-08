@@ -34,45 +34,50 @@ class Player(object):
         global EnemyArmor
         global EnemyNotDead
         global PlayerNotDead
-        Enemy = E.Goblin()
+        curEnemy = None
+        Enemy = {E.goblin.Type: E.goblin}
+        print(E.goblin.Type)
         EnemyNotDead = True
         PlayerNotDead = True
         attack = True
-        if x in E.monsters:
-            if attack == True:
-                if PlayerNotDead and EnemyNotDead:
-                    checkForHit = r.randint(0, 20)
-                    print(checkForHit)
-                    if checkForHit >= Enemy.armor:
-                        damageDealt = r.randint(0, 20)
-                        damageDealt += self.damage
-                        Enemy.HP -= damageDealt
-                        print(Fore.YELLOW + f"You did {damageDealt} damage to the {x}")
-                        if Enemy.HP <= 0:
-                            print(f"You killed the {x}!")
-                            EnemyNotDead = False
-                            attack = False
-                            print(Style.RESET_ALL)
-                        else:
-                            pass  # continue fight
+        Output = None
+        if attack == True:
+            if PlayerNotDead and EnemyNotDead:
+                checkForHit = r.randint(0, 20)
+                print(checkForHit)
+                if checkForHit >= Enemy[x].armor:
+                    damageDealt = r.randint(0, 20)
+                    damageDealt += self.damage
+                    Enemy[x].HP -= damageDealt
+                    print(Fore.YELLOW + f"You did {damageDealt} damage to the {x}")
+                    Output = f"You did {damageDealt} damage to the {x}"
+                    if Enemy[x].HP <= 0:
+                        print(f"You killed the {x}!")
+                        Output = f"You killed the {x}!"
+                        EnemyNotDead = False
+                        attack = False
+                        print(Style.RESET_ALL)
                     else:
-                        print(Fore.YELLOW + "It hit the armor.")  # hit armor
+                        pass  # continue fight
                 else:
-                    pass  # end combat
+                    print(Fore.YELLOW + "It hit the armor.")  # hit armor
+                    Output = "It hit the armor."
             else:
-                print(Fore.RED + "There is nothing to attack!")
-                print(Style.RESET_ALL)
+                Output = 'You won!'
+                pass  # end combat
         else:
-            print(Fore.RED + "Attack what?")
+            Output = "There is nothing to attack!"
+            print(Fore.RED + "There is nothing to attack!")
             print(Style.RESET_ALL)
+        return Output
 
     def Look(self, x):
+        global lookObject
         print(Fore.GREEN)
         if x == "look":
             x = roomIn
             print(R.rooms[x])
             print(Style.RESET_ALL)
-            global lookObject
             lookObject = "What?"
         #elif x in I.items:
             #print(I.items[x])
@@ -84,6 +89,7 @@ class Player(object):
             lookObject = "What?"
             print(Fore.RED + "What?")
             print(Style.RESET_ALL)
+        return lookObject, roomIn
 
 
 class Elf(Player):

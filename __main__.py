@@ -1,7 +1,7 @@
 import os
 import random as r
 from map import *
-
+import rooms as rms
 from PyQt5 import QtCore, QtGui, QtWidgets
 from colorama import Fore, Style
 import mainPlayer as P
@@ -31,57 +31,6 @@ class Game:
         os.system('cls' if os.name == 'nt' else 'clear')
 
     @staticmethod
-    def setupGame():
-        global currentPlayer
-        P.Name = input(Fore.CYAN + "What is your name, Hero? > ")
-        Race = input("Are you an elf, dwarf, or human? > ")
-        Race = str(Race.lower())
-        if Race == "elf":
-            P.Race = "Elf"
-        elif Race == "dwarf":
-            P.Race = "Dwarf"
-        elif Race == "human":
-            P.Race = "Human"
-        else:
-            print("What?")
-            Game.setupGame()
-        Class = ""
-        if Race == "human":
-            Class = input("Are you a rogue or a monk? > ")
-            print(Style.RESET_ALL)
-            Class = str(Class.lower())
-            if Class == "rogue":
-                currentPlayer = P.Rogue()
-            elif Class == "monk":
-                currentPlayer = P.Monk()
-            else:
-                print("What?")
-                Game.setupGame()
-        elif Race == "elf":
-            Class = input("Are you a ranger or a mage? > ")
-            print(Style.RESET_ALL)
-            Class = str(Class.lower())
-            if Class == "ranger":
-                currentPlayer = P.Ranger()
-            elif Class == "mage":
-                currentPlayer = P.Mage()
-            else:
-                print("What?")
-                Game.setupGame()
-        elif Race == "dwarf":
-            Class = input("Are you a cleric or a barbarian? > ")
-            print(Style.RESET_ALL)
-            Class = str(Class.lower())
-            if Class == "cleric":
-                currentPlayer = P.Cleric()
-            elif Class == "barbarian":
-                currentPlayer = P.Barbarian()
-            else:
-                print("What?")
-                Game.setupGame()
-        print(f"Rise {P.Name} the {Race} {Class}. The kingdom needs you!")
-
-    @staticmethod
     def UpdateGame():
         pass
 
@@ -101,8 +50,6 @@ class Game:
         print(Style.RESET_ALL + "Plain text designates commands you enter.")
         print(Style.RESET_ALL)
 
-
-
     @staticmethod
     def RandomEncounter(Monster):
         # add individual monster noises)
@@ -117,14 +64,14 @@ class Game:
     def initiate():
         global map
         Game.clearScreen()
-        Game.setupGame()
+        ui.setupGame(Ui_MainWindow)
         P.Player.inv.clear()
         map = Map()
 
     @staticmethod
     def MainLoop():
         Game.UpdateGame()
-        #Ui_MainWindow.TakeInput()
+        # Ui_MainWindow.TakeInput()
 
     @staticmethod
     def GetLoot(Monster, DC):
@@ -140,9 +87,8 @@ class Game:
         else:
             pass
 
+
 class Ui_MainWindow(object):
-
-
     global Output
     global tb
     global lineEdit
@@ -154,7 +100,7 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEdit.setGeometry(QtCore.QRect(10, 410, 1031, 22))
+        self.lineEdit.setGeometry(QtCore.QRect(10, 642, 750, 22))
         font = QtGui.QFont()
         font.setFamily("Courier New")
         font.setPointSize(9)
@@ -163,7 +109,7 @@ class Ui_MainWindow(object):
         self.lineEdit.setObjectName("lineEdit")
         self.textBrowser = QtWidgets.QTextBrowser(self.centralwidget)
         self.textBrowser.setEnabled(True)
-        self.textBrowser.setGeometry(QtCore.QRect(10, 10, 1031, 391))
+        self.textBrowser.setGeometry(QtCore.QRect(10, 10, 750, 620))
         font = QtGui.QFont()
         font.setFamily("Courier New")
         font.setPointSize(9)
@@ -214,53 +160,94 @@ class Ui_MainWindow(object):
 
     def appendTB(self, text):
         tb = self.textBrowser
+        print(self.textBrowser.length())
         self.playerLastInput = text
-        print(self.playerLastInput)
         x = self.playerLastInput
         x = x.lower()
         args = x.split(' ')
         length = len(args)
-        print (args)
+        Output = []
         if args[0] in actions:
             if args[0] == "look":
-                print("looking")
                 P.Player.Look(currentPlayer, args[length - 1])
-                print("Working 1")
-                print(P.Player.lookObject)
-                Output = P.Player.lookObject
-                print("Working 2")
-                print(Output)
-                main.Ui_MainWindow.tb.append(Output)
-                lineEdit.clear()
-            elif args[0] == "clear":
-                Game.clearScreen()
-            elif args[0] == "help":
-                Game.Help()
+                Output = str(rms.descriptions[length - 1])
+            #elif args[0] == "clear":
+                #Game.clearScreen()
+            #elif args[0] == "help":
+                #Game.Help()
             elif args[0] == "attack":
-                P.Player.Attack(currentPlayer, args[length - 1])
-            elif args[0] == "map":
-                print("yeet")
-                map.showMap()
+                attackEnemy = P.Player.Attack(currentPlayer, args[length - 1])
+                Output.append(attackEnemy)
         else:
-            print(Fore.RED + "I don't know what you mean")
-            print(Style.RESET_ALL)
             Output = "I don't know what you mean"
-            tb.append(Output)
+        if type(Output) == list:
+            tb.append('Game: ' + str(Output[0]))
+        else:
+            tb.append('Game: ' + str(Output))
+        self.lineEdit.clear()
+
+    def setupGame(self):
+        global currentPlayer
+        P.Name = input(Fore.CYAN + "What is your name, Hero? > ")
+        Race = input("Are you an elf, dwarf, or human? > ")
+        Race = str(Race.lower())
+        if Race == "elf":
+            P.Race = "Elf"
+        elif Race == "dwarf":
+            P.Race = "Dwarf"
+        elif Race == "human":
+            P.Race = "Human"
+        else:
+            print("What?")
+            Game.setupGame()
+        Class = ""
+        Class = input("Are you a rogue or a monk? > ")
+        print(Style.RESET_ALL)
+        Class = str(Class.lower())
+        if Race == "human":
+            if Class == "rogue":
+                currentPlayer = P.Rogue()
+            elif Class == "monk":
+                currentPlayer = P.Monk()
+            else:
+                pass
+        elif Race == "elf":
+            Class = input("Are you a ranger or a mage? > ")
+            print(Style.RESET_ALL)
+            Class = str(Class.lower())
+            if Class == "ranger":
+                currentPlayer = P.Ranger()
+            elif Class == "mage":
+                currentPlayer = P.Mage()
+            else:
+                print("What?")
+                Ui_MainWindow.setupGame()
+        elif Race == "dwarf":
+            Class = input("Are you a cleric or a barbarian? > ")
+            print(Style.RESET_ALL)
+            Class = str(Class.lower())
+            if Class == "cleric":
+                currentPlayer = P.Cleric()
+            elif Class == "barbarian":
+                currentPlayer = P.Barbarian()
+        else:
+            tb.append('Game: ' + "What?")
             self.lineEdit.clear()
-
-
+            Ui_MainWindow.setupGame()
+        print(f"Rise {P.Player.Name} the {Race} {Class}. The kingdom needs you!")
 
 # run game
-Game.initiate()
-
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
+
+Game.initiate()
 
 while gameQuit == False:
     Game.MainLoop()
