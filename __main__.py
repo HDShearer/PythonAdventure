@@ -1,10 +1,12 @@
 import os
 import random as r
-from map import *
-import rooms as rms
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 from colorama import Fore, Style
+
 import mainPlayer as P
+import rooms as rms
+from map import *
 
 # print(Style.RESET_ALL)
 
@@ -51,7 +53,7 @@ class Game:
         print(Style.RESET_ALL)
 
     @staticmethod
-    def RandomEncounter(Monster):
+    def RandomEncounter():
         # add individual monster noises)
         EnemyRoll = r.randint(0, 20)
         PlayerRoll = r.randint(0, 20)
@@ -171,10 +173,10 @@ class Ui_MainWindow(object):
             if args[0] == "look":
                 P.Player.Look(currentPlayer, args[length - 1])
                 Output = str(rms.descriptions[length - 1])
-            #elif args[0] == "clear":
-                #Game.clearScreen()
-            #elif args[0] == "help":
-                #Game.Help()
+            # elif args[0] == "clear":
+            # Game.clearScreen()
+            # elif args[0] == "help":
+            # Game.Help()
             elif args[0] == "attack":
                 attackEnemy = P.Player.Attack(currentPlayer, args[length - 1])
                 Output.append(attackEnemy)
@@ -235,6 +237,7 @@ class Ui_MainWindow(object):
             self.lineEdit.clear()
             Ui_MainWindow.setupGame()
         print(f"Rise {P.Player.Name} the {Race} {Class}. The kingdom needs you!")
+
 
 # run game
 if __name__ == "__main__":
