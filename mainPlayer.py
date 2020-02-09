@@ -10,6 +10,7 @@ global roomIn
 global x
 global y
 
+
 class Player(object):
     roomName = "spawn"
     global roomIn
@@ -49,7 +50,8 @@ class Player(object):
                     damageDealt = r.randint(0, 20)
                     damageDealt += self.damage
                     Enemy[x].HP -= damageDealt
-                    print(Fore.YELLOW + f"You did {damageDealt} damage to the {x}")
+                    print(Fore.YELLOW +
+                          f"You did {damageDealt} damage to the {x}")
                     Output = f"You did {damageDealt} damage to the {x}"
                     if Enemy[x].HP <= 0:
                         print(f"You killed the {x}!")
@@ -79,9 +81,9 @@ class Player(object):
             print(R.rooms[x])
             print(Style.RESET_ALL)
             lookObject = "What?"
-        #elif x in I.items:
-            #print(I.items[x])
-            #print(Style.RESET_ALL)
+        # elif x in I.items:
+            # print(I.items[x])
+            # print(Style.RESET_ALL)
         elif x in E.monsters:
             print(E.monsters[x])
             print(Style.RESET_ALL)
