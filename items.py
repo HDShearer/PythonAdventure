@@ -42,7 +42,8 @@ def generateGeneric(self):
 
 # creates a starting inventory. Will add different variations based on the race the player picked.
 def startingInventory(self):
-    Inventory = {0: itemsGeneric['sword'], 1: itemsGeneric['ration'], 2: itemsGeneric['leather armour']}
+    Inventory = {0: itemsGeneric['sword'],
+                 1: itemsGeneric['ration'], 2: itemsGeneric['leather armour']}
     return Inventory
 
 

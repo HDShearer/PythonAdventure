@@ -12,7 +12,8 @@ from map import *
 
 # Define all variables, lists, etc
 
-actions = {"look": "Look", "go": "Go", "clear": "Clear", "help": "Help", "attack": "Attack", "map": "Map"}
+actions = {"look": "Look", "go": "Go", "clear": "Clear",
+           "help": "Help", "attack": "Attack", "map": "Map"}
 
 global currentPlayer
 global Output
@@ -134,7 +135,8 @@ class Ui_MainWindow(object):
         self.actionLoad_Game = QtWidgets.QAction(MainWindow)
         self.actionLoad_Game.setObjectName("actionLoad_Game")
         self.actionEnter_current_command = QtWidgets.QAction(MainWindow)
-        self.actionEnter_current_command.setObjectName("actionEnter_current_command")
+        self.actionEnter_current_command.setObjectName(
+            "actionEnter_current_command")
         self.menuFile.addAction(self.actionSave_Game)
         self.menuFile.addAction(self.actionLoad_Game)
         self.menuFile.addSeparator()
@@ -145,7 +147,8 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        self.actionEnter_current_command.triggered.connect(lambda: self.appendTB(self.lineEdit.text()))
+        self.actionEnter_current_command.triggered.connect(
+            lambda: self.appendTB(self.lineEdit.text()))
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -157,8 +160,10 @@ class Ui_MainWindow(object):
         self.actionSave_Game.setToolTip(_translate("MainWindow", "Save Game"))
         self.actionSave_Game.setShortcut(_translate("MainWindow", "Ctrl+S"))
         self.actionLoad_Game.setText(_translate("MainWindow", "Load Game"))
-        self.actionEnter_current_command.setText(_translate("MainWindow", "Enter current command"))
-        self.actionEnter_current_command.setShortcut(_translate("MainWindow", "Return"))
+        self.actionEnter_current_command.setText(
+            _translate("MainWindow", "Enter current command"))
+        self.actionEnter_current_command.setShortcut(
+            _translate("MainWindow", "Return"))
 
     def appendTB(self, text):
         tb = self.textBrowser
